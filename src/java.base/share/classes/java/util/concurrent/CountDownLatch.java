@@ -223,6 +223,11 @@ public class CountDownLatch {
      * then {@link InterruptedException} is thrown and the current thread's
      * interrupted status is cleared.
      *
+     * <p> 检查 state 的值：
+     * 1、如果 state 为 0，说明计数器已经减为 0，则可以继续执行，不需要阻塞。
+     * 2、如果 state 大于 0，那么会将当前线程加入 AQS 的等待队列，并使其阻塞。
+     * </ul>
+     *
      * @throws InterruptedException if the current thread is interrupted
      *         while waiting
      */
@@ -283,6 +288,7 @@ public class CountDownLatch {
      * <p>If the current count is greater than zero then it is decremented.
      * If the new count is zero then all waiting threads are re-enabled for
      * thread scheduling purposes.
+     * <p>负责唤醒等待队列的线程、维护state的值
      *
      * <p>If the current count equals zero then nothing happens.
      */
