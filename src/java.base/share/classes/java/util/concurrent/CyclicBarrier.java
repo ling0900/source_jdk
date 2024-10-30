@@ -156,7 +156,7 @@ public class CyclicBarrier {
     }
 
     /** The lock for guarding barrier entry */
-    private final ReentrantLock lock = new ReentrantLock();
+    private final ReentrantLock lock = new ReentrantLock(); // 组合设计模式，这个和CountDownLatch有区别。
     /** Condition to wait on until tripped */
     private final Condition trip = lock.newCondition();
     /** The number of parties */
